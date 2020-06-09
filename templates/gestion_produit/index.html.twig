@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir tous nos clients {% endblock %}
+
+{% block body %}
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th> Nom </th>
+        <th> Photo </th>
+        <th> Stock </th>
+        <th> Prix </th>
+        <th> action </th>
+      </tr>
+    </thead>
+    <tbody>
+		{% for GesProduit in Gesproduits %}
+      <tr>
+        <td> {{ GesProduit.nom }} </td>
+        <td> <img class="img-fluid img-thumbnail" style="width:15%; height:auto" src="{{ asset('image/' ~ GesProduit.photo) }}" </td>
+        <td> {{ GesProduit.stock }} </td>
+        <td> {{ GesProduit.prix }} € </td>
+        <td> 
+        
+        <a href="{{ path('modif_produit', {'id': GesProduit.id}) }}" class="btn btn-primary btn" alt="modifier"> <i class="icon-edit"></i> </a> 
+        <a href="{{ path('api_produit_deleteP', {'id': GesProduit.id}) }}" onclick="return confirm('êtes-vous sûr de voulir supprimer le produit : {{GesProduit.nom}} ?')"  class="btn btn-danger btn" alt="supprimer"> <i class="icon-trash"></i> </a>
+        </td>
+      </tr>
+  	{% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

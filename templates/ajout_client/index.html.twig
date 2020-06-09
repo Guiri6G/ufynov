@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Créeer un client {% endblock %}
+
+{% block body %}
+
+
+<h1> Créeer un client </h1>
+
+{{ form_start(form) }}
+
+<div class="form-group">
+    {{ form_label(form.nom) }}
+    {{ form_widget(form.nom) }}   
+</div>
+<div class="form-group">
+    {{ form_label(form.prenom) }}
+    {{ form_widget(form.prenom) }}
+</div>
+<div class="form-group">
+    {{ form_label(form.email) }}
+    {{ form_widget(form.email) }}
+</div>
+<br>
+<button class="btn btn-primary"> valider </button>
+{{ form_end(form) }}
+{% endblock %}  

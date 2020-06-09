@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voir toutes nos factures {% endblock %}
+
+{% block body %}
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th> N° Facture </th>
+        <th> Date émission </th>
+        <th> Statut facture </th>
+        <th> Date Paiement </th>
+        <th> Prix total </th>
+        <th> action </th>
+      </tr>
+    </thead>
+    <tbody>
+		{% for facture in factures %}
+      <tr>
+        <td> {{ facture.id }} </td>
+        <td> {{ facture.dateEmission|date('d/m/Y') }} </td>
+        <td> {% if facture.StatutPaiement == 0  %}
+                non-payé
+             {% else %}
+                payé
+             {% endif %}   
+         </td>      
+         <td>   
+            {% if facture.datePaiement is null  %}
+                non-payé
+             {% else %}
+               {{ facture.datePaiement|date('d/m/Y') }}
+             {% endif %}  
+          </td>
+        <td> {{ facture.prixTotal }} € </td>
+        <td> 
+        
+        <a href="{{ path('api_facture_updatePaiement', {'id': facture.id}) }}" class="btn btn-warning" alt="payer"> <i class="icon-credit-card"></i> </a> 
+       <a href="{{ path('api_facture_deleteF', {'id': facture.id}) }}" onclick="return confirm('êtes-vous sûr de voulir supprimer Mr. {{facture.refClient}} ?')"  class="btn btn-danger btn" alt="supprimer"> <i class="icon-trash"></i> </a>
+        </td>
+      </tr>
+  	{% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
